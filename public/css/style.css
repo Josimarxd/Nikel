@@ -57,14 +57,18 @@ header{
     font-size: 35px;
     border: 2px solid #4e0070;
     background-color: #4e0070;
-    color: white;
+    color: #ffffff;
 }
 .button-float:hover{
     border: 2px solid #4c79d3;
     background-color: #ffffff;
     color: #4c79d3;
 }
-.button-login:hover, .button-default:hover{
+.button-login:hover{
+    background-color: #4c79d3;
+    color: #ffffff;
+}
+.button-default:hover{
     background-color: #4c79d3;
     color: #ffffff;
 }
