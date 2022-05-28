@@ -55,6 +55,7 @@ document.getElementById("create-form").addEventListener("submit",function(e){
     alert("Conta criada com sucesso!");
 });
 
+checkLogged();
 function checkLogged(){
     if(session){
         sessionStorage.setItem("logged", session);

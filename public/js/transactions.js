@@ -16,9 +16,9 @@ document.getElementById("transaction-form").addEventListener("submit", function(
     const date = document.getElementById("date-input").value;
     const type = document.querySelector('input[name = "type-input"]:checked').value;
 
-    data.transactions.unshift[{
+    data.transactions.unshift({
         value: value, type: type, description: description, date: date
-    }];
+    });
 
     saveData(data);
     e.target.reset();
@@ -49,12 +49,13 @@ function checkLogged(){
 
     getTransactions();
 }
+document.getElementById("button-logout").addEventListener("click", logout);
 
 function logout(){
     sessionStorage.removeItem("logged");
     localStorage.removeItem("session");
 
-    window.location.hrfe = "index.html";
+    window.location.href = "index.html";
 }
 
 function getTransactions(){
@@ -63,7 +64,7 @@ function getTransactions(){
 
     if(transactions.length){
         transactions.forEach((item) =>{
-            let type = "Entntrada";
+            let type = "Entrada";
 
             if(item.type ==="2"){
                 type = "Saída";
