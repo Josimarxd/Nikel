@@ -6,12 +6,12 @@ let data = {
 };
 
 document.getElementById("button-logout").addEventListener("click", logout);
-document.getElementById("transactions-button").addEventListener("click", function(){
+document.getElementById("transactions-button").addEventListener("click", function () {
     window.location.href = "transactions.html"
 })
 
 //Adicionar lançamento
-document.getElementById("transaction-form").addEventListener("submit", function(e){
+document.getElementById("transaction-form").addEventListener("submit", function (e) {
     e.preventDefault();
 
     const value = parseFloat(document.getElementById("value-input").value);
@@ -34,21 +34,21 @@ document.getElementById("transaction-form").addEventListener("submit", function(
     alert("Lançamento adicionado com sucesso.");
 })
 
-checkLogged();  
+checkLogged();
 
-function checkLogged(){
-    if(session){
+function checkLogged() {
+    if (session) {
         sessionStorage.setItem("logged", session);
         logged = session;
     }
 
-    if(!logged){
+    if (!logged) {
         window.location.href = "index.html";
         return;
     }
 
     const dataUser = localStorage.getItem(logged);
-    if(dataUser){
+    if (dataUser) {
         data = JSON.parse(dataUser);
     }
 
@@ -57,30 +57,30 @@ function checkLogged(){
     getTotal();
 }
 document.getElementById("button-logout").addEventListener("click", logout);
-function logout(){
+function logout() {
     sessionStorage.removeItem("logged");
     localStorage.removeItem("session");
 
     window.location.href = "index.html";
 }
 
-function getCashIn(){
+function getCashIn() {
     const transactions = data.transactions;
 
     const cashIn = transactions.filter((item) => item.type === "1");
     let cashInHtml = '';
-    if(cashIn.length){
-        
+    if (cashIn.length) {
+
         let limit = 0;
 
-        if(cashIn.length > 5){
-        limit = 5;
-        } else{
-        limit = cashIn.length;
+        if (cashIn.length > 5) {
+            limit = 5;
+        } else {
+            limit = cashIn.length;
         }
 
         for (let index = 0; index < limit; index++) {
-            cashInHtml +=`
+            cashInHtml += `
             <div class="row mb-4">
                                         <div class="col-12">
                                             <h3 class="fs-2">${cashIn[index].value.toFixed(2)}</h3>
@@ -96,29 +96,29 @@ function getCashIn(){
                                             </div>
                                         </div>
                                     </div>`
-            
+
         }
     }
-        document.getElementById("cash-in-list").innerHTML = cashInHtml;
-    }    
+    document.getElementById("cash-in-list").innerHTML = cashInHtml;
+}
 
-function getCashOut(){
+function getCashOut() {
     const transactions = data.transactions;
 
     const cashOut = transactions.filter((item) => item.type === "2");
-    
+
     let cashOutHtml = '';
-    if(cashOut.length){
+    if (cashOut.length) {
         let limit = 0;
 
-        if(cashOut.length > 5){
-        limit = 5;
-        } else{
-        limit = cashOut.length;
+        if (cashOut.length > 5) {
+            limit = 5;
+        } else {
+            limit = cashOut.length;
         }
 
         for (let index = 0; index < limit; index++) {
-            cashOutHtml +=`
+            cashOutHtml += `
             <div class="row mb-4">
                                         <div class="col-12">
                                             <h3 class="fs-2">${cashOut[index].value.toFixed(2)}</h3>
@@ -134,26 +134,26 @@ function getCashOut(){
                                             </div>
                                         </div>
                                     </div>`
-            
-        }
-        }
-        document.getElementById("cash-out-list").innerHTML = cashOutHtml;
-    }
 
-function getTotal(){
+        }
+    }
+    document.getElementById("cash-out-list").innerHTML = cashOutHtml;
+}
+
+function getTotal() {
     const transactions = data.transactions;
-    let total = 0; 
+    let total = 0;
 
     transactions.forEach((item) => {
-        if(item.type === "1"){
+        if (item.type === "1") {
             total += item.value;
-        } else{
+        } else {
             total -= item.value;
         }
     });
 
     document.getElementById("total").innerHTML = `R$ ${total.toFixed(2)}`;
 }
-function saveData(data){
+function saveData(data) {
     localStorage.setItem(data.login, JSON.stringify(data));
 }

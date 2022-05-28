@@ -8,7 +8,7 @@ let data = {
 document.getElementById("button-logout").addEventListener("click", logout);
 
 //Adicionar lançamento
-document.getElementById("transaction-form").addEventListener("submit", function(e){
+document.getElementById("transaction-form").addEventListener("submit", function (e) {
     e.preventDefault();
 
     const value = parseFloat(document.getElementById("value-input").value);
@@ -29,21 +29,21 @@ document.getElementById("transaction-form").addEventListener("submit", function(
     alert("Lançamento adicionado com sucesso.");
 })
 
-checkLogged();  
+checkLogged();
 
-function checkLogged(){
-    if(session){
+function checkLogged() {
+    if (session) {
         sessionStorage.setItem("logged", session);
         logged = session;
     }
 
-    if(!logged){
+    if (!logged) {
         window.location.href = "index.html";
         return;
     }
 
     const dataUser = localStorage.getItem(logged);
-    if(dataUser){
+    if (dataUser) {
         data = JSON.parse(dataUser);
     }
 
@@ -51,22 +51,22 @@ function checkLogged(){
 }
 document.getElementById("button-logout").addEventListener("click", logout);
 
-function logout(){
+function logout() {
     sessionStorage.removeItem("logged");
     localStorage.removeItem("session");
 
     window.location.href = "index.html";
 }
 
-function getTransactions(){
+function getTransactions() {
     const transactions = data.transactions;
     let transactionsHtml = ``;
 
-    if(transactions.length){
-        transactions.forEach((item) =>{
+    if (transactions.length) {
+        transactions.forEach((item) => {
             let type = "Entrada";
 
-            if(item.type ==="2"){
+            if (item.type === "2") {
                 type = "Saída";
             }
 
@@ -84,6 +84,6 @@ function getTransactions(){
     document.getElementById("transactions-list").innerHTML = transactionsHtml;
 }
 
-function saveData(data){
+function saveData(data) {
     localStorage.setItem(data.login, JSON.stringify(data));
 }
